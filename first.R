@@ -14,3 +14,6 @@ Books$BV <- ((W*R)+(Books$NOR*Books$Rating))/(W+Books$NOR)*2
 Books$BV <- trunc(Books$BV*10^2)/10^2
 
 # Plotting the graph of Book Value vs Page Count
+plot(Books$Page,Books$BV,xlab="Page Count",ylab="Book Value",main="Book Value vs Page Count")
+text(Books$Page+0.0001,Books$BV,Books$Name,col='black')
+
