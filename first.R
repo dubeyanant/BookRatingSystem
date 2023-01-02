@@ -14,6 +14,10 @@ Books$BV <- ((W*R)+(Books$NOR*Books$Rating))/(W+Books$NOR)*2
 Books$BV <- trunc(Books$BV*10^2)/10^2
 
 # Plotting the graph of Book Value vs Page Count
-plot(Books$Page,Books$BV,xlab="Page Count",ylab="Book Value",main="Book Value vs Page Count")
-text(Books$Page+0.0001,Books$BV,Books$Name,col='black')
-
+#install.packages("ggplot2")
+#library("ggplot2")
+ggplot(data = Books,
+       mapping = aes(x = Page,
+                     y = BV)) + geom_point() + 
+  geom_label(aes(label=Name), nudge_y = 0.05, size = 3) + 
+  labs(x = "Page Count", y = "Book Value")
