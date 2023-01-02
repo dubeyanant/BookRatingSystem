@@ -19,10 +19,13 @@ Books <- Books[order(Books$BV, decreasing = TRUE), ]
 # Plotting the graph of Book Value vs Page Count
 #install.packages("ggplot2")
 #install.packages("gghighlight")
+#install.packages("ggrepel")
+library("ggrepel") 
 library("ggplot2")
 library("gghighlight")
 ggplot(data = Books, mapping = aes(x = Page, y = BV,)) +
   geom_point(color = "red") + 
-  geom_label(aes(label=Name), nudge_y = 0.08, size = 3) + 
+  geom_label_repel(aes(label=Name), nudge_y = 0.04, size = 3) + 
   labs(x = "Page Count", y = "Book Value") + 
-  gghighlight(BV > 7.7, Page < 250, label_key = type)
+  gghighlight(BV > 7.7, Page < 200, label_key = type)
+#+ geom_text_repel(aes(x = Page, y = BV, label = Name))
