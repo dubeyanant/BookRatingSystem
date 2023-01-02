@@ -13,11 +13,16 @@ W <- R/10
 Books$BV <- ((W*R)+(Books$NOR*Books$Rating))/(W+Books$NOR)*2
 Books$BV <- trunc(Books$BV*10^2)/10^2
 
+Books <- Books[order(Books$BV, decreasing = TRUE), ]
+
 # Plotting the graph of Book Value vs Page Count
 #install.packages("ggplot2")
-#library("ggplot2")
+#install.packages("gghighlight")
+library("ggplot2")
+library("gghighlight")
 ggplot(data = Books,
        mapping = aes(x = Page,
                      y = BV)) + geom_point() + 
   geom_label(aes(label=Name), nudge_y = 0.05, size = 3) + 
-  labs(x = "Page Count", y = "Book Value")
+  labs(x = "Page Count", y = "Book Value") + 
+  gghighlight(BV > 8, Page < 250, label_key = type)
