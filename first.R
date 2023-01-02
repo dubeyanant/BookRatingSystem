@@ -12,7 +12,7 @@ W <- 500
 
 # Formula for finding the Book Value: BV = (W*R + NOR*Rating) / (W+NOR)
 Books$BV <- (((W*R)+(Books$NOR*Books$Rating))/(W+Books$NOR))*2
-#Books$BV <- trunc(Books$BV*10^2)/10^2
+Books$BV <- trunc(Books$BV*10^2)/10^2
 
 Books <- Books[order(Books$BV, decreasing = TRUE), ]
 
@@ -25,4 +25,4 @@ ggplot(data = Books, mapping = aes(x = Page, y = BV,)) +
   geom_point(color = "red") + 
   geom_label(aes(label=Name), nudge_y = 0.08, size = 3) + 
   labs(x = "Page Count", y = "Book Value") + 
-  gghighlight(BV > 7.5, Page < 250, label_key = type)
+  gghighlight(BV > 7.7, Page < 250, label_key = type)
